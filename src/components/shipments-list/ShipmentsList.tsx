@@ -1,108 +1,71 @@
-import React, { ReactElement } from 'react'
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { ReactElement, useContext, useState, SyntheticEvent, useEffect } from 'react';
+import { Shipment } from '../../models/shipment';
+import { ShipmentContext } from '../shipments-tracker/ShipmentsTracker';
+import './ShipmentList.css'
 
-interface Props {}
+export default function ShipmentsList({}): ReactElement {
+  const {state, fetchShipmentPage, dispatch} = useContext(ShipmentContext);
+  const [sortConfig, setSort] = useState<{column: string | undefined, order: string}>({column: 'id', order: 'asc'})
+  const handleSort = (event: SyntheticEvent<HTMLElement>) => {
+    // debugger
+    const column = event.currentTarget.dataset.sortColumn
+    if (column === sortConfig.column) {
+      setSort({
+        ...sortConfig,
+        order: sortConfig.order === 'asc' ? 'desc' : 'asc'
+      })
+    } else {
+      setSort({ ...sortConfig, column, order: 'asc' })
+    }
+  }
 
-export default function ShipmentsList({}: Props): ReactElement {
+  useEffect(() => {
+    fetchShipmentPage({sortColumn: sortConfig.column, sortOrder: sortConfig.order})
+  }, [fetchShipmentPage, sortConfig])
+
   return (
-    <div>
-      <table className='table is-bordered is-striped is-hoverable is-fullwidth'>
-        <thead>
-          <tr>
-            <th>
-              <abbr title='Position'>Pos</abbr>
-            </th>
-            <th>Team</th>
-            <th>
-              <abbr title='Played'>Pld</abbr>
-            </th>
-            <th>
-              <abbr title='Won'>W</abbr>
-            </th>
-            <th>
-              <abbr title='Drawn'>D</abbr>
-            </th>
-            <th>
-              <abbr title='Lost'>L</abbr>
-            </th>
-            <th>
-              <abbr title='Goals for'>GF</abbr>
-            </th>
-            <th>
-              <abbr title='Goals against'>GA</abbr>
-            </th>
-            <th>
-              <abbr title='Goal difference'>GD</abbr>
-            </th>
-            <th>
-              <abbr title='Points'>Pts</abbr>
-            </th>
-            <th>Qualification or relegation</th>
-          </tr>
-        </thead>
+    <>
+      {/* {loading ? <i className='fas fa-spinner fa-spin fa-2x'></i> : null} */}
+      {state.loading ? 'Loading...' : null}
 
-        <tbody>
-          <tr>
-            <th>20</th>
-            <td>
-              <a
-                href='https://en.wikipedia.org/wiki/Aston_Villa_F.C.'
-                title='Aston Villa F.C.'
-              >
-                Aston Villa
-              </a>{' '}
-              <strong>(R)</strong>
-            </td>
-            <td>38</td>
-            <td>3</td>
-            <td>8</td>
-            <td>27</td>
-            <td>27</td>
-            <td>76</td>
-            <td>−49</td>
-            <td>17</td>
-            <td>
-              Relegation to the{' '}
-              <a
-                href='https://en.wikipedia.org/wiki/2016%E2%80%9317_Football_League_Championship'
-                title='2016–17 Football League Championship'
-              >
-                Football League Championship
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <nav className='pagination' role='navigation' aria-label='pagination'>
-        <button
-          className='pagination-previous'
-          title='This is the first page'
-          disabled
-        >
-          Previous
-        </button>
-        <button className='pagination-next'>Next page</button>
-        <ul className='pagination-list'>
-          <li>
-            <a
-              className='pagination-link is-current'
-              aria-label='Page 1'
-              aria-current='page'
-            >
-              1
-            </a>
-          </li>
-          <li>
-            <a className='pagination-link' aria-label='Goto page 2'>
-              2
-            </a>
-          </li>
-          <li>
-            <a className='pagination-link' aria-label='Goto page 3'>
-              3
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+      {!state.loading && state.shipments.length ? (
+        <>
+          {/* {JSON.stringify(shipments)} */}
+          <table className='table is-bordered is-striped is-hoverable is-fullwidth sortable-table'>
+            <thead>
+              <tr>
+                <th data-sort-column="id" onClick={handleSort}>Id</th>
+                <th data-sort-column="name" onClick={handleSort}>Name</th>
+                <th data-sort-column="mode" onClick={handleSort}>Mode</th>
+                <th data-sort-column="type" onClick={handleSort}>Type</th>
+                <th data-sort-column="origin" onClick={handleSort}>Origin</th>
+                <th data-sort-column="destination" onClick={handleSort}>Destination</th>
+                <th data-sort-column="status" onClick={handleSort}>Status</th>
+                {/* <th>Total</th> */}
+                {/* <th>UserId</th> */}
+              </tr>
+            </thead>
+            <tbody>
+              {state.shipments.map(shipment => (
+                <tr key={shipment.id}>
+                  <td>{shipment.id}</td>
+                  <td>{shipment.name}</td>
+                  <td>{shipment.mode}</td>
+                  <td>{shipment.type}</td>
+                  <td>{shipment.origin}</td>
+                  <td>{shipment.destination}</td>
+                  {/* <td>{shipment.total}</td> */}
+                  <td>{shipment.status}</td>
+                  {/* <td>{shipment.userId}</td> */}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+        </>
+      ) : null}
+      {/* {!loading && !shipments.length && <div>No Data. </div>} */}
+    </>
   )
 }

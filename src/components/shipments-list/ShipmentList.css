@@ -1,0 +1,5 @@
+.sortable-table th[data-sort-column]{
+    color: rgb(2, 2, 133);
+    text-decoration: underline;
+    cursor: pointer;
+}

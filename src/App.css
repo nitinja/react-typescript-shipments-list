@@ -17,6 +17,10 @@ html {
   flex: 1;
 }
 
+.container {
+  flex-grow: initial;
+}
+
 .center {
   display: flex;
   justify-content: center;
@@ -28,12 +32,20 @@ html {
 }
 .search-container {
   height: 80px;
-  flex-grow: initial;
 }
 .search-input {
   width: 100%;
 }
 
 .footer {
+  margin-top: 16px;;
   padding: 16px;
 }
+
+.is-fullwidth {
+  width: 100%;
+}
+
+/* .pagination {
+  margin-bottom: 16px;
+} */
