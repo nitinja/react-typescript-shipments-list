@@ -1,25 +1,28 @@
-import React, { useContext, useState, useRef, useCallback } from 'react'
+import React, { useCallback, useContext, useRef } from 'react'
+import { useHistory } from 'react-router-dom'
 import { ShipmentContext } from '../shipments-tracker/ShipmentsTracker'
-export function SearchBar({}) {
-  const { state, fetchShipmentPage, dispatch } = useContext(ShipmentContext)
-  // const [term, setTerm] = useState('')
+import './SearchBar.css'
+
+
+/* Search Bar Component */
+export function SearchBar() {
+  const { dispatch } = useContext(ShipmentContext)
   const inputRef = useRef<HTMLInputElement>(null)
+  const history = useHistory()
   const handleSearch = useCallback(() => {
     const term = inputRef.current?.value
     if (!term) {
       return
     }
-    // debugger
     if (!validateIdFormat(term)) {
       dispatch({
         type: 'SHIPMENT_PAGE_FAILURE',
-        payload: 'Please enter correct ID. Example: "A9999", "S1000"'
+        payload: 'Please enter correct ID. Example: "S1000"'
       })
-    }else{
-      dispatch()
+    } else {
+      history.push(`/shipment/${term}`)
     }
-    console.log(inputRef.current?.value)
-  }, [dispatch])
+  }, [dispatch, history])
   const handleEnter = useCallback(
     event => {
       if (event.key === 'Enter') {

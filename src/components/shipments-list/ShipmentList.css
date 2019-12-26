@@ -1,5 +1,5 @@
-.sortable-table th[data-sort-column]{
-    color: rgb(2, 2, 133);
+.sortable-table th[data-sort-column], .sortable-table a{
+    color: blue;
     text-decoration: underline;
     cursor: pointer;
 }

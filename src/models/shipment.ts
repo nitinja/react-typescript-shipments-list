@@ -22,4 +22,5 @@ export interface Cargo {
 
 export interface Service {
     type: string;
+    value?: string;
 }

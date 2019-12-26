@@ -8,17 +8,20 @@
   "license": "MIT",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
+    "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
+    "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.0",
+    "@types/react-router-dom": "^5.1.3",
+    "http-proxy-middleware": "^0.20.0",
+    "json-server": "^0.14.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
-    "typescript": "~3.7.2",
-    "json-server": "^0.14.2"
+    "typescript": "~3.7.2"
   },
   "proxy": "http://localhost:3001",
   "scripts": {
@@ -26,7 +29,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server db.json --port 3001er"
+    "server": "json-server db.json --port 3001"
   },
   "eslintConfig": {
     "extends": "react-app"

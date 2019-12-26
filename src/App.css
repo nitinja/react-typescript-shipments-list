@@ -15,6 +15,8 @@ html {
 
 .content-wrapper {
   flex: 1;
+  padding:1rem;
+  width:100%;
 }
 
 .container {
@@ -27,15 +29,7 @@ html {
   align-items: center;
 }
 
-.search-input-container {
-  width: 300px;
-}
-.search-container {
-  height: 80px;
-}
-.search-input {
-  width: 100%;
-}
+
 
 .footer {
   margin-top: 16px;;

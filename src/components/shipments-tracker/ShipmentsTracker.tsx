@@ -1,17 +1,17 @@
-import React, { useEffect, useReducer, useCallback } from 'react'
+import React, { useCallback, useEffect, useReducer } from 'react'
 import { api, FetchPageResponse } from '../../api/api'
 import { Shipment } from '../../models/shipment'
+import { Paginator } from '../Paginator'
 import { SearchBar } from '../search-bar/SearchBar'
 import ShipmentsList from '../shipments-list/ShipmentsList'
-import { Paginator } from '../Paginator'
 import './ShipmentTracker.css'
 
+/* Main Shipment list state for use in useReducer hook */
 type AppState = {
   loading: boolean
   shipments: Shipment[]
   currentPage: number
   totalRecords: number
-  searchTerm: string
   errorMessage: string
   sortColumn: string | undefined
   sortOrder: string | undefined
@@ -22,12 +22,12 @@ const initialState: AppState = {
   shipments: [],
   currentPage: 1,
   totalRecords: 0,
-  searchTerm: '',
   errorMessage: '',
   sortColumn: 'id',
   sortOrder: 'asc'
 }
 
+/* Possible Actions */
 type Action =
   | {
       type: 'REQUEST_SHIPMENT_PAGE'
@@ -35,10 +35,8 @@ type Action =
     }
   | { type: 'SHIPMENT_PAGE_SUCCESS'; payload: FetchPageResponse }
   | { type: 'SHIPMENT_PAGE_FAILURE'; payload: string }
-  | { type: 'REQUEST_SHIPMENT_SEARCH'; payload: string }
-  | { type: 'SHIPMENT_SEARCH_SUCCESS'; payload: Shipment }
-  | { type: 'SHIPMENT_SEARCH_FAILURE'; payload: string }
 
+ /* Reducer to use with useReducer hook */
 export function reducer(state = initialState, action: Action): AppState {
   switch (action.type) {
     case 'REQUEST_SHIPMENT_PAGE':
@@ -75,17 +73,22 @@ export type PageParameters = {
   sortOrder?: string
 }
 
+/* useReducer will be used with context to provide state to children components.*/
 interface ShipmentContextInterface {
   state: AppState
   dispatch: any
   fetchShipmentPage: (params: PageParameters) => void
 }
 
+/* Content to serve app state and dispatcher to children tree */
 export const ShipmentContext = React.createContext<ShipmentContextInterface>(
   {} as ShipmentContextInterface
 )
 
+/* Shipments list Component. Uses reducer + context pattern, no Redux necessary since its a small app. */
 export function ShipmentsTracker() {
+
+  /* State of main shipment list */
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const fetchShipmentPage = useCallback(
@@ -98,11 +101,11 @@ export function ShipmentsTracker() {
     []
   )
 
+  /* Effect to fetch shipments thru API class - each time page params changes */
   useEffect(() => {
     api
       .fetchShipmentPage(state.currentPage, state.sortColumn, state.sortOrder)
       .then((response: FetchPageResponse) => {
-        //   debugger
         dispatch({ type: 'SHIPMENT_PAGE_SUCCESS', payload: response })
       })
       .catch((error: any) =>
@@ -119,7 +122,6 @@ export function ShipmentsTracker() {
         {state.errorMessage && (
           <div className='container'>
             <div className='notification is-danger error'>
-              {/* <button className='delete'></button> */}
               {state.errorMessage}
             </div>
           </div>

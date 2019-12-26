@@ -1,0 +1,6 @@
+.field.readonly {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 0.375em;
+}
