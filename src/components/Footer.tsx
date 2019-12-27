@@ -1,7 +1,7 @@
 import React from 'react'
-export function Footer() {
+const Footer = React.memo(() => {
   return (
-    <footer className='footer'>
+    <footer className='footer' role="contentinfo">
       <div className='content has-text-centered'>
         <p>
           FreightHub Shipments Search Demo by Nitin Jadhav
@@ -10,4 +10,6 @@ export function Footer() {
       </div>
     </footer>
   )
-}
+})
+
+export default Footer

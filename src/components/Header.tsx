@@ -1,7 +1,7 @@
 import React from 'react'
-export function Header() {
+const Header = React.memo(() => {
   return (
-    <nav className='navbar'>
+    <header className='navbar' role="navigation">
       <div className='container'>
         <div className='navbar-brand'>
           <a className='navbar-item is-size-5' href='../'>
@@ -9,6 +9,7 @@ export function Header() {
           </a>
         </div>
       </div>
-    </nav>
+    </header>
   )
-}
+})
+export default Header

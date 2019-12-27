@@ -2,21 +2,21 @@
 
 import { Shipment } from '../models/shipment'
 
-export const BASE_URL = `${location.origin}/`
+export const BASE_URL = `${process.env.REACT_APP_API_ENDPOINT}`
 export const PAGE_SIZE = 20
+
 
 export type FetchPageResponse = {
   data: Shipment[]
   totalRecords: number
 }
 
+/* Get shipment data page by page number and other fields*/
 const fetchShipmentPage = (
   pageNumber: number,
   sortColumn?: string,
   sortOrder?: string
 ): Promise<FetchPageResponse> => {
-  console.log('fetching data')
-  // debugger
   const url = new URL(BASE_URL + 'shipments')
   url.searchParams.append('_page', String(pageNumber))
   url.searchParams.append('_sort', String(sortColumn))
@@ -27,8 +27,6 @@ const fetchShipmentPage = (
     fetch(url.href)
       .then(async (response: any) => {
         if (response.status === 200) {
-          // debugger
-          console.log(response.headers.get('x-total-count'))
           resolve({
             data: await response.json(),
             totalRecords: response.headers.get('x-total-count')
@@ -43,15 +41,14 @@ const fetchShipmentPage = (
       .catch(() => reject('Error occurred while fetching shipments.'))
   })
 }
+
+/* Get shipment details */
 const fetchShipmentDetail = (shipmentId: string): Promise<Shipment> => {
-  console.log('fetching data for shipment id', shipmentId)
   const url = new URL(`${BASE_URL}shipments/${shipmentId}`)
   return new Promise((resolve, reject) => {
     fetch(url.href)
       .then(async (response: any) => {
         if (response.status === 200) {
-          // debugger
-          console.log(response)
           resolve(await response.json())
         }
         if (response.status === 404) {
@@ -64,8 +61,9 @@ const fetchShipmentDetail = (shipmentId: string): Promise<Shipment> => {
   })
 }
 
+/* update details (currently only name is updatable) */
 const updateShipmentDetail = (shipmentId: string, shipment: Shipment) => {
-  console.log('updating data for shipment id', shipmentId, shipment)
+
   const url = new URL(`${BASE_URL}shipments/${shipmentId}`)
   return new Promise((resolve, reject) => {
     fetch(url.href, {
@@ -78,8 +76,6 @@ const updateShipmentDetail = (shipmentId: string, shipment: Shipment) => {
     })
       .then(async (response: any) => {
         if (response.status === 200) {
-          // debugger
-          console.log(response)
           resolve(await response.json())
         }
         if (response.status === 404) {

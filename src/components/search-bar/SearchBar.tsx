@@ -36,14 +36,15 @@ export function SearchBar() {
       <div className='control search-input-container'>
         <input
           className='input search-input'
+          data-testid="search"
           type='text'
-          placeholder='Find a repository'
+          placeholder='Enter Shipment Id. For Example "S1000"'
           ref={inputRef}
           onKeyDown={handleEnter}
         />
       </div>
       <div className='control'>
-        <button className='button is-info' onClick={handleSearch}>
+        <button className='button is-info'  data-testid="search-button" onClick={handleSearch}>
           <i className='fas fa-search'></i>
         </button>
       </div>

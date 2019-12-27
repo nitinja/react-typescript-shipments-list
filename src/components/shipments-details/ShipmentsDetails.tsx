@@ -7,20 +7,24 @@ import { Shipment } from '../../models/shipment'
 import './ShipmentDetails.css'
 
 /* Shipment Details Component */
-export default function ShipmentsDetails(): ReactElement {
-  const history = useHistory()
+export default function ShipmentDetails(): ReactElement {
   const [shipment, setShipment] = useState<Shipment | null>(null)
   const [error, setError] = useState('')
+
+  /* Shipment id param from url */
   const { id } = useParams()
+  const history = useHistory()
 
   useEffect(() => {
     if (id) {
       api
         .fetchShipmentDetail(id)
         .then(shipment => setShipment(shipment))
-        .catch(() => setError('Error: No shipment found.'))
+        .catch(() => {
+          setError('Error: No shipment found.')
+        })
     }
-  }, [history, id])
+  }, [id])
 
   const updateShipmentName = useCallback(
     event => {
@@ -34,6 +38,7 @@ export default function ShipmentsDetails(): ReactElement {
 
   return (
     <div className='container content-wrapper'>
+      {/* {JSON.stringify(shipment)} */}
       {error && <div className='notification is-danger error'>{error}</div>}
       {!error && shipment && (
         <>
@@ -137,6 +142,7 @@ export default function ShipmentsDetails(): ReactElement {
               <div className='field'>
                 <div className='control'>
                   <button
+                    data-testid="updatebutton"
                     disabled={!shipment.name}
                     className='button is-primary'
                     onClick={updateShipmentName}
@@ -163,10 +169,10 @@ function ReadOnlyField({
   return (
     <div className='field is-horizontal'>
       <div className='field-label is-normal'>
-        <label className='label'>{label}</label>
+        <label className='label' htmlFor={label}>{label}</label>
       </div>
       <div className='field-body'>
-        <div className='field readonly'>{field}</div>
+        <div id={label} className='field readonly'>{field}</div>
       </div>
     </div>
   )

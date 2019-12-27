@@ -2,7 +2,7 @@
   "shipments": [
     {
       "id": "S1000",
-      "name": "T-shirts(Summer2018) from Shanghai to Hamburg3",
+      "name": "T-shirts(Summer2018) from Shanghai to Hamburg2",
       "cargo": [
         {
           "type": "Fabric",

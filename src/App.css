@@ -9,10 +9,6 @@ html {
   flex-direction: column;
 }
 
-/* .container {
-  flex: auto;
-} */
-
 .content-wrapper {
   flex: 1;
   padding:1rem;
@@ -29,8 +25,6 @@ html {
   align-items: center;
 }
 
-
-
 .footer {
   margin-top: 16px;;
   padding: 16px;
@@ -39,7 +33,3 @@ html {
 .is-fullwidth {
   width: 100%;
 }
-
-/* .pagination {
-  margin-bottom: 16px;
-} */
