@@ -5,7 +5,7 @@ import './SearchBar.css'
 
 
 /* Search Bar Component */
-export function SearchBar() {
+export default function SearchBar() {
   const { dispatch } = useContext(ShipmentContext)
   const inputRef = useRef<HTMLInputElement>(null)
   const history = useHistory()
@@ -52,6 +52,6 @@ export function SearchBar() {
   )
 }
 
-export function validateIdFormat(term: string) {
+const validateIdFormat = (term: string): boolean => {
   return /^[A-Z]\d+$/.test(term)
 }

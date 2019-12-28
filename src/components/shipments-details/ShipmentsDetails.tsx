@@ -55,15 +55,17 @@ export default function ShipmentDetails(): ReactElement {
           />
           <div className='field is-horizontal'>
             <div className='field-label is-normal'>
-              <label className='label' htmlFor="name">Name</label>
+              <label className='label' htmlFor='name'>
+                Name
+              </label>
             </div>
             <div className='field-body'>
               <div className='field'>
                 <div className='control'>
                   <input
                     id='name'
-                    name="name"
-                    className={`input ${!shipment.name ? "is-danger" : ""}`}
+                    name='name'
+                    className={`input ${!shipment.name ? 'is-danger' : ''}`}
                     type='text'
                     placeholder='Enter Shipment Name'
                     value={shipment.name}
@@ -72,7 +74,9 @@ export default function ShipmentDetails(): ReactElement {
                     }
                   />
                 </div>
-                {!shipment.name && <p className='help is-danger'>This field is required</p>}
+                {!shipment.name && (
+                  <p className='help is-danger'>This field is required</p>
+                )}
               </div>
             </div>
           </div>
@@ -142,7 +146,7 @@ export default function ShipmentDetails(): ReactElement {
               <div className='field'>
                 <div className='control'>
                   <button
-                    data-testid="updatebutton"
+                    data-testid='updatebutton'
                     disabled={!shipment.name}
                     className='button is-primary'
                     onClick={updateShipmentName}
@@ -159,20 +163,24 @@ export default function ShipmentDetails(): ReactElement {
   )
 }
 
-function ReadOnlyField({
+const ReadOnlyField = ({
   label,
   field
 }: {
   label: string
   field: React.ReactElement
-}) {
+}) => {
   return (
     <div className='field is-horizontal'>
       <div className='field-label is-normal'>
-        <label className='label' htmlFor={label}>{label}</label>
+        <label className='label' htmlFor={label}>
+          {label}
+        </label>
       </div>
       <div className='field-body'>
-        <div id={label} className='field readonly'>{field}</div>
+        <div id={label} className='field readonly'>
+          {field}
+        </div>
       </div>
     </div>
   )

@@ -1,10 +1,10 @@
-import { cleanup, fireEvent, render, getByTestId } from '@testing-library/react'
+import { cleanup, fireEvent, render } from '@testing-library/react'
 import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import { TEST_DATA } from '../../test-data/test-data'
 // import { BrowserRouter } from 'react-router-dom'
 import { ShipmentContext } from '../shipments-tracker/ShipmentsTracker'
 import ShipmentsList from './ShipmentsList'
-import { BrowserRouter } from 'react-router-dom'
-import { TEST_DATA } from '../../test-data/test-data'
 
 afterEach(cleanup)
 

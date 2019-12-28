@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useReducer } from 'react'
 import { api, FetchPageResponse } from '../../api/api'
 import Paginator from '../Paginator'
-import { SearchBar } from '../search-bar/SearchBar'
+import SearchBar from '../search-bar/SearchBar'
 import ShipmentsList from '../shipments-list/ShipmentsList'
 import './ShipmentTracker.css'
 import { AppState, reducer, initialState } from './reducer'

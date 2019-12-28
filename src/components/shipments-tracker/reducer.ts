@@ -39,10 +39,7 @@ type Action =
       payload: string
     }
 /* Reducer to use with useReducer hook */
-export function reducer(
-  shipmentsListState = initialState,
-  action: Action
-): AppState {
+export const reducer = (shipmentsListState = initialState, action: Action): AppState  => {
 
   // debugger;
   switch (action.type) {
