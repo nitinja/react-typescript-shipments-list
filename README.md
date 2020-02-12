@@ -1,58 +1,42 @@
-# FreightHub Frontend Coding Challenge
+# Showcase: React app for Shipment tracking, follows best practices
 
-Welcome to the FreightHub frontend coding challenge! Please read the following instructions carefully.
+## Introduction
 
-**Your goal is to set up an application which enables the user to view and manage shipments.**
+**Features -**
 
-# Contents
+1. React app built with Typescript, a components - based SPA. Bootstrapped using Create-react-app.
+2. All functional requirements including **sorting, pagination, editing, saving, API calls with fetch** are done. **No custom component used.**
+3. Tests: All major flows covered with test cases with **react-testing-library**
+4. State management with useReducer + context hooks, because redux-like solution isn't necessary for such a small app
+5. **Code splitting implemented**: Major Components are lazily loaded/bundle splitting using **React.lazy**
+6. Styles in separate files in each component
+7. **App is configurable by environment variables** (.env.development and .env.production files)
+8. **Dev/Prod mode** is supported by node script commands "yarn start" and "yarn build"  (same as create-react-app)
+9. App is responsive except table. (Table can be made responsive by showing/hiding columns or changing layout - will take additional efforts)
+10. Hot-module-reload is supported in branch "hot-reload" Done using `craco` package. HMR isn't reliable enough to include in master branch.
 
--   [Business need](#business-need)
--   [Use cases](#use-cases)
--   [Evaluation criteria](#evaluation-criteria)
-    -   [Technology requirements](#technology-requirements)
-    -   [Code requirements](Criteria.md#must-have)
--   [How to submit](#how-to-submit)
--   [How to run API server](#how-to-run-api-server)
--   [Time limit](#time-limit)
+## Instructions
+1. Install dependencies using
+    `yarn`
+2. Start API server using
+   `yarn server`
 
-# Business need
+3. Start dev server using
+   `yarn start`
 
-The main goal is for the user to check the shipments at a glance. This allows users to take faster decisions and plan ahead of time.
+4. Open `localhost:3000` in browser (tested in chrome and firefox)
 
-Providing information to the customer increases transparency and reduces communication issues.
 
 # Use cases
 
-- The user shall be able to:
+- The user can:
   - See shipments in pages of 20 elements per page
   - Search by shipment id
   - Sort by different fields (e.g. id, name) in ascending/descending order
   - View the shipment information on a separate shipment details page
   - Update the shipment name (should persist when the page is reloaded)
 
-The interactions should not refresh the page.
-
-# Evaluation criteria
-
-## Technology requirements
-
-**React** and **JavaScript** are mandatory requirements. Apart from this, you can use any libraries, task runners and build processors. ES6 and TypeScript are highly encouraged.
-
-## Code requirements
-
-The full criteria for evaluating the coding challenge can be found [here](./Criteria.md).
-
-# How to submit
-
-- Clone this repository.
-- A RESTful API for `shipments` is provided with the challenge. To run, follow: [How to run API server](#how-to-run-api-server)
-- Complete your project as described above within your local repository.
-- Make sure that there are scripts to start both the server and the client.
-- Ensure everything you want to commit is committed before you bundle.
-- Create a git bundle: `git bundle create your_name.bundle --all`
-- Email the bundle file to your point of contact.
-
-**In order to be fair to all candidates, please refrain from sharing your solution on public repository hosting services such as GitHub and Bitbucket.**
+The interactions wont refresh the page.
 
 # How to run API server
 
@@ -64,10 +48,3 @@ yarn server or npm run server
 ```
 
 Check [json-server](https://github.com/typicode/json-server) for more information.
-
-# Time limit
-
-There is no hard time limit for this coding challenge. However, we believe that 3-4 hours is sufficient for the must-have parts of the application. While we appreciate all the effort put into the challenge, we also do not want to take up too much of your time. Our advice is to focus on making sure [that the application works properly and has some tests](Criteria.md#must-have) before moving on to secondary objectives. Happy coding!
-
-Good luck,
-The FreightHub Team
